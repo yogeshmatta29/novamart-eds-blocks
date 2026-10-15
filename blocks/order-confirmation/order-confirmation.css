@@ -1,0 +1,207 @@
+/* ========================================
+   Order Confirmation Section
+======================================== */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+main {
+    max-width: 100%;
+    min-width: 0;
+}
+
+main .section:has(.order-confirmation-container) {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 40px 24px;
+    overflow-x: clip;
+}
+
+main .section:has(.order-confirmation-container)>.default-content-wrapper {
+    width: 100%;
+    max-width: none;
+}
+
+main .section:has(.order-confirmation-container)>.order-confirmation-wrapper {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+}
+
+/* ========================================
+   Confirmation Card
+======================================== */
+
+.order-confirmation-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 820px;
+    min-width: 0;
+    margin: 0 auto;
+    padding: 48px 40px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 4px 24px rgb(0 0 0 / 6%);
+    text-align: center;
+}
+
+/* Success Icon */
+
+.order-success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 42px;
+    font-weight: 700;
+}
+
+/* Headings and Success Message */
+
+.order-confirmation-container h1 {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 4vw, 38px);
+    line-height: 1.2;
+}
+
+.order-confirmation-container h2 {
+    margin: 32px 0 20px;
+    font-size: 24px;
+}
+
+.order-confirmation-container h3 {
+    font-size: 20px;
+}
+
+.order-success-message {
+    margin: 0 0 28px;
+    color: #15803d;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Order Reference */
+
+.order-number {
+    box-sizing: border-box;
+    max-width: 100%;
+    margin: 24px 0;
+    padding: 18px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+/* Customer and Delivery Details */
+
+.order-confirmation-container>p {
+    line-height: 1.6;
+}
+
+/* Products List */
+
+.confirmation-items {
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    margin-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.confirmation-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    box-sizing: border-box;
+    max-width: 100%;
+    min-width: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.confirmation-item span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.confirmation-item span:first-child {
+    flex: 1;
+}
+
+.confirmation-item span:last-child {
+    flex-shrink: 0;
+    white-space: nowrap;
+    text-align: right;
+}
+
+/* Order Total */
+
+.order-confirmation-container .confirmation-total {
+    margin: 24px 0 0;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Continue Shopping Button */
+
+.order-confirmation-container .order-home-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: 32px;
+    padding: 14px 24px;
+    border-radius: 8px;
+    background: #0755c7;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.order-confirmation-container .order-home-link:hover {
+    background: #063f94;
+}
+
+/* ========================================
+   Responsive Layout
+======================================== */
+
+@media (max-width: 600px) {
+    main .section:has(.order-confirmation-container) {
+        padding: 24px 12px;
+    }
+
+    .order-confirmation-container {
+        padding: 28px 18px;
+    }
+
+    .order-confirmation-container h1 {
+        font-size: 28px;
+    }
+
+    .order-confirmation-container h2 {
+        font-size: 22px;
+    }
+
+    .confirmation-item {
+        gap: 12px;
+    }
+}

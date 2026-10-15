@@ -262,3 +262,18 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+main>.section.hero-container {
+  margin-bottom: 0;
+}
+
+main>.section.cards-container {
+  margin-top: 0;
+}
+main>.section:first-of-type {
+  margin-top: 0;
+}
+
+main>.section h1 {
+  margin-top: 0;
+}

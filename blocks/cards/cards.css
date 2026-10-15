@@ -25,3 +25,39 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+
+/* Shop by Category section */
+main .section.cards-container {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+/* Shop by Category heading */
+main .section.cards-container h2#shop-by-category {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.cards .add-to-cart {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 0 16px 16px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #0755c7;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cards .add-to-cart:hover {
+  background-color: #063f94;
+}
+
+.cards .add-to-cart:disabled {
+  background-color: #39804a;
+  cursor: default;
+}

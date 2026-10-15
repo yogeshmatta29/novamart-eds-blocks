@@ -1,6 +1,9 @@
 import { fetchPlaceholders, getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
+import { getCartCount } from '../../scripts/cart.js';
+
+
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
@@ -190,28 +193,95 @@ export default async function decorate(block) {
     if (section) section.classList.add(`nav-${c}`);
   });
 
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  
+const navBrand = nav.querySelector('.nav-brand');
+
+if (navBrand) {
+  const brandLink = navBrand.querySelector('a');
+
   if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+    const logo = document.createElement('img');
+    logo.src = '/images/novamart-logo.png';
+    logo.alt = 'NovaMart';
+    logo.width = 150;
+
+    brandLink.replaceChildren(logo);
+    brandLink.classList.remove('button', 'primary', 'secondary');
+
+    const container = brandLink.closest('.button-container');
+    if (container) container.classList.remove('button-container');
   }
+}
+
 
   const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
+   // Keep navigation items as regular links, not CTA buttons
+    navSections.querySelectorAll('.button').forEach((link) => {
+      link.classList.remove('button', 'primary', 'secondary');
+      const container = link.closest('.button-container');
+      if (container) {
+        container.classList.remove('button-container');
+      }
     });
+  
+if (navSections) {
+  const wrapper = navSections.querySelector('.default-content-wrapper');
+
+  if (wrapper) {
+    const links = [...wrapper.querySelectorAll(':scope > p > a')];
+
+    // Convert standalone paragraphs into a single navigation list.
+    if (links.length) {
+      const list = document.createElement('ul');
+
+      links.forEach((link) => {
+        const li = document.createElement('li');
+        link.classList.remove('button', 'primary', 'secondary');
+        li.append(link);
+        list.append(li);
+      });
+
+      wrapper.replaceChildren(list);
+    }
   }
 
+  navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+    if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+
+    navSection.addEventListener('click', () => {
+      if (isDesktop.matches) {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      }
+    });
+  });
+}
+
   const navTools = nav.querySelector('.nav-tools');
+  
+if (navTools && !navTools.querySelector('.nav-cart')) {
+  const cartLink = document.createElement('a');
+  cartLink.className = 'nav-cart';
+  cartLink.href = '/cart';
+  cartLink.setAttribute('aria-label', 'Shopping cart');
+
+  const cartIcon = document.createElement('span');
+  cartIcon.textContent = '🛒';
+
+  const cartCount = document.createElement('span');
+  cartCount.className = 'nav-cart-count';
+  cartCount.textContent = getCartCount();
+
+  cartLink.append(cartIcon, cartCount);
+  navTools.append(cartLink);
+}
+window.addEventListener('cart-updated', () => {
+  const count = navTools.querySelector('.nav-cart-count');
+  if (count) {
+    count.textContent = getCartCount();
+  }
+});
   if (navTools) {
     const search = navTools.querySelector('a[href*="search"]');
     if (search && search.textContent === '') {
