@@ -138,13 +138,28 @@ export function decorateMain(main) {
  * Loads everything needed to get to LCP.
  * @param {Element} doc The container element
  */
+
 async function loadEager(doc) {
+  // Preload the hero background image for faster LCP
+  const heroImage = '/images/novamart-hero.png';
+
+  if (!document.querySelector('link[rel="preload"][as="image"]')) {
+    const preload = document.createElement('link');
+    preload.rel = 'preload';
+    preload.as = 'image';
+    preload.href = heroImage;
+    document.head.append(preload);
+  }
+
   doc.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+
   if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
     doc.body.dataset.breadcrumbs = true;
   }
+
   const main = doc.querySelector('main');
+
   if (main) {
     decorateMain(main);
     doc.body.classList.add('appear');
@@ -154,14 +169,15 @@ async function loadEager(doc) {
   sampleRUM.enhance();
 
   try {
-    /* if desktop (proxy for fast connection) or fonts already loaded, load fonts.css */
+    // Load fonts on desktop or if fonts were previously loaded
     if (window.innerWidth >= 900 || sessionStorage.getItem('fonts-loaded')) {
       loadFonts();
     }
   } catch (e) {
-    // do nothing
+    // Do nothing
   }
 }
+
 
 /**
  * Loads everything that doesn't need to be delayed.

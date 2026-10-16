@@ -1,4 +1,7 @@
-/* Checkout page layout */
+/* ========================================
+   Checkout Layout
+======================================== */
+
 .checkout-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
@@ -6,10 +9,14 @@
     align-items: start;
 }
 
-/* Form and summary cards */
+/* ========================================
+   Form and Summary Cards
+======================================== */
+
 .checkout-form,
 .checkout-summary {
     box-sizing: border-box;
+    width: 100%;
     min-width: 0;
     padding: 28px;
     border: 1px solid #e5e7eb;
@@ -20,56 +27,76 @@
 
 .checkout-form h2,
 .checkout-summary h2 {
-    margin-top: 0;
-    margin-bottom: 24px;
+    margin: 0 0 24px;
+    font-size: 24px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
 }
 
-/* Delivery form labels */
+/* ========================================
+   Form Labels
+======================================== */
+
 .checkout-form label {
     display: block;
-    margin: 18px 0 8px;
+    margin: 16px 0 6px;
+    font-size: 16px;
     font-weight: 600;
+    line-height: 1.4;
 }
 
-/* Text inputs and payment dropdown */
+/* ========================================
+   Form Inputs
+======================================== */
+
 .checkout-form input,
-.checkout-form select {
+.checkout-form select,
+.checkout-form textarea {
     display: block;
     box-sizing: border-box;
     width: 100%;
-    min-height: 52px;
-    margin: 0 0 22px;
-    padding: 12px 16px;
+    max-width: 100%;
+    min-height: 48px;
+    margin: 0 0 18px;
+    padding: 12px 14px;
     border: 1px solid #cbd5e1;
     border-radius: 8px;
     background-color: #fff;
     color: #171717;
     font: inherit;
+    font-size: 16px;
     line-height: 1.4;
 }
 
-.checkout-form input:focus,
-.checkout-form select:focus {
+.checkout-form textarea {
+    resize: vertical;
+}
+
+.checkout-form input:focus-visible,
+.checkout-form select:focus-visible,
+.checkout-form textarea:focus-visible {
     outline: 2px solid #0755c7;
     outline-offset: 2px;
 }
 
-/* Payment dropdown arrow spacing */
 .checkout-form select {
-    padding-right: 48px;
+    padding-right: 40px;
     cursor: pointer;
 }
 
-/* Place Order button */
+/* ========================================
+   Place Order Button
+======================================== */
+
 .checkout-form button[type="submit"] {
     display: block;
     box-sizing: border-box;
     width: 100%;
-    min-height: 52px;
+    min-height: 48px;
     margin-top: 8px;
-    padding: 14px 18px;
+    padding: 12px 16px;
     border: 0;
-    border-radius: 8px;
+    border-radius: 6px;
     background: #0755c7;
     color: #fff;
     font-size: 16px;
@@ -82,25 +109,35 @@
     background: #063f94;
 }
 
+.checkout-form button[type="submit"]:focus-visible {
+    outline: 3px solid #171717;
+    outline-offset: 3px;
+}
+
 .checkout-form button[type="submit"]:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-/* Order summary products */
+/* ========================================
+   Order Summary Products
+======================================== */
+
 .checkout-products {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0;
 }
 
 .checkout-product {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
-    padding-bottom: 16px;
+    gap: 12px;
+    padding: 14px 0;
     border-bottom: 1px solid #e5e7eb;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .checkout-product span:first-child {
@@ -111,24 +148,35 @@
 
 .checkout-product span:last-child {
     flex-shrink: 0;
-    white-space: nowrap;
     text-align: right;
+    white-space: nowrap;
 }
 
 .checkout-summary>p {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
     margin: 20px 0 16px;
     padding-bottom: 12px;
     border-bottom: 1px solid #e5e7eb;
+    font-size: 16px;
+    overflow-wrap: anywhere;
 }
 
 .checkout-summary>h3 {
-    margin-bottom: 0;
+    margin: 20px 0 0;
+    font-size: 24px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
 }
 
-/* Tablet layout */
-@media (max-width: 760px) {
+/* ========================================
+   Tablet Layout
+======================================== */
+
+@media (max-width: 800px) {
     .checkout-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 20px;
     }
 
@@ -138,15 +186,64 @@
     }
 }
 
-/* Mobile layout */
-@media (max-width: 480px) {
+/* ========================================
+   Mobile Layout
+======================================== */
+
+@media (max-width: 600px) {
+    .checkout-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
 
     .checkout-form,
     .checkout-summary {
         padding: 18px;
     }
 
+    .checkout-form h2,
+    .checkout-summary h2 {
+        margin-bottom: 18px;
+        font-size: 22px;
+        line-height: 1.3;
+    }
+
+    .checkout-form label {
+        margin: 14px 0 6px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .checkout-form input,
+    .checkout-form select,
+    .checkout-form textarea {
+        min-height: 46px;
+        margin-bottom: 16px;
+        font-size: 16px;
+    }
+
+    .checkout-form button[type="submit"] {
+        min-height: 46px;
+        font-size: 15px;
+    }
+
     .checkout-product {
-        gap: 12px;
+        gap: 8px;
+        padding: 12px 0;
+        font-size: 14px;
+    }
+
+    .checkout-product span:last-child {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .checkout-summary>p {
+        font-size: 14px;
+    }
+
+    .checkout-summary>h3 {
+        font-size: 22px;
+        line-height: 1.3;
     }
 }

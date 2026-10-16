@@ -28,15 +28,18 @@ export default function decorate(block) {
 
     if (matchedCategory && !/₹\s?[\d,]+/.test(cardContent)) {
       li.classList.add('category-card');
-      li.style.cursor = 'pointer';
 
-      li.addEventListener('click', (event) => {
-        if (event.target.closest('button, a')) return;
-        window.location.href = categoryRoutes[matchedCategory];
-      });
+      const categoryLink = document.createElement('a');
+      categoryLink.className = 'category-card-link';
+      categoryLink.href = categoryRoutes[matchedCategory];
+      categoryLink.setAttribute('aria-label', `Browse ${matchedCategory}`);
+
+      while (li.firstElementChild) {
+        categoryLink.append(li.firstElementChild);
+      }
+
+      li.append(categoryLink);
     }
-
-
 
     [...li.children].forEach((div) => {
       if (div.children.length === 1 && div.querySelector('picture')) {
@@ -87,11 +90,34 @@ export default function decorate(block) {
     ul.append(li);
   });
 
-  ul.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
-    );
-  });
+  
+ul.querySelectorAll('picture > img').forEach((img) => {
+  const picture = img.closest('picture');
+  const cardText = img.closest('li')?.textContent
+    .trim()
+    .toLowerCase();
+
+  let alt = img.alt?.trim();
+
+  if (!alt) {
+    if (cardText?.includes('mobile')) {
+      alt = 'Mobile phones';
+    } else if (cardText?.includes('laptop')) {
+      alt = 'Laptops and computers';
+    } else if (cardText?.includes('audio')) {
+      alt = 'Headphones and audio devices';
+    } else if (cardText?.includes('accessories')) {
+      alt = 'Tech accessories';
+    } else {
+      alt = 'NovaMart product';
+    }
+  }
+
+  picture.replaceWith(
+    createOptimizedPicture(img.src, alt, false, [{ width: '750' }]),
+  );
+});
+
 
   block.replaceChildren(ul);
 }
