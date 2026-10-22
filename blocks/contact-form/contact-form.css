@@ -1,0 +1,134 @@
+.contact-form-container .contact-form-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-form-content {
+    padding: 32px;
+    background: #f5f8fc;
+    border-radius: 12px;
+}
+
+.contact-form-content h2 {
+    margin: 0 0 12px;
+    color: #123d72;
+    font-size: 32px;
+}
+
+.contact-form-intro {
+    margin: 0 0 24px;
+    line-height: 1.6;
+}
+
+.contact-form-fields {
+    display: grid;
+    gap: 18px;
+}
+
+.contact-form-fields label {
+    display: grid;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.contact-form-fields input,
+.contact-form-fields textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #aab4c0;
+    border-radius: 6px;
+    background: #fff;
+    color: #222;
+    font: inherit;
+}
+
+.contact-form-fields textarea {
+    resize: vertical;
+}
+
+.contact-form-fields input:focus,
+.contact-form-fields textarea:focus {
+    outline: 2px solid #1769aa;
+    outline-offset: 2px;
+}
+
+.contact-form-fields button {
+    justify-self: start;
+    min-height: 44px;
+    padding: 12px 24px;
+    border: 0;
+    border-radius: 6px;
+    background: #1769aa;
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.contact-form-fields button:hover {
+    background: #123d72;
+}
+
+.contact-form-status {
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .contact-form-content {
+        padding: 20px 16px;
+    }
+
+    .contact-form-content h2 {
+        font-size: 26px;
+        line-height: 1.3;
+    }
+
+    .contact-form-fields {
+        gap: 16px;
+    }
+
+    .contact-form-fields button {
+        width: 100%;
+    }
+}
+/* Validation feedback */
+.contact-form-fields input:invalid:not(:placeholder-shown),
+.contact-form-fields textarea:invalid:not(:placeholder-shown) {
+    border-color: #c62828;
+}
+
+/* Keyboard focus */
+.contact-form-fields input:focus-visible,
+.contact-form-fields textarea:focus-visible,
+.contact-form-fields button:focus-visible {
+    outline: 2px solid #1769aa;
+    outline-offset: 3px;
+}
+
+/* Submit state */
+.contact-form-fields button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* Status message */
+.contact-form-status {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #176b35;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+
+    .contact-form-fields input,
+    .contact-form-fields textarea {
+        font-size: 16px;
+    }
+
+    .contact-form-fields button {
+        width: 100%;
+        min-height: 46px;
+    }
+}
